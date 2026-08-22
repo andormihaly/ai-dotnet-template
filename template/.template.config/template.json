@@ -1,0 +1,13 @@
+{
+	"$schema": "http://json.schemastore.org/template",
+	"author": "Andor Mihaly",
+	"classifications": [
+		"Web",
+		"AI",
+		"Clean Architecture"
+	],
+	"identity": "AiDotNet.Template",
+	"name": "AI-Ready .NET",
+	"shortName": "ai-dotnet",
+	"sourceName": "AiDotNet"
+}

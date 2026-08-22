@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/AiDotNet.Api/AiDotNet.Api.csproj" />
+    <Project Path="src/AiDotNet.Application/AiDotNet.Application.csproj" />
+    <Project Path="src/AiDotNet.Domain/AiDotNet.Domain.csproj" />
+    <Project Path="src/AiDotNet.Infrastructure/AiDotNet.Infrastructure.csproj" />
+  </Folder>
+</Solution>
