@@ -1,13 +1,80 @@
 {
-	"$schema": "http://json.schemastore.org/template",
-	"author": "Andor Mihaly",
-	"classifications": [
-		"Web",
-		"AI",
-		"Clean Architecture"
-	],
-	"identity": "AiDotNet.Template",
-	"name": "AI-Ready .NET",
-	"shortName": "ai-dotnet",
-	"sourceName": "AiDotNet"
+  "$schema": "https://json.schemastore.org/template",
+  "author": "Andor Mihaly",
+  "classifications": [
+    "Web",
+    "Web API",
+    "Clean Architecture",
+    "AI"
+  ],
+  "identity": "AiDotNet.Template",
+  "name": "AI-Ready .NET",
+  "shortName": "ai-dotnet",
+  "sourceName": "AiDotNet",
+  "preferNameDirectory": true,
+  "placeholderFilename": "-.-",
+
+  "symbols": {
+    "ai": {
+      "type": "parameter",
+      "datatype": "choice",
+      "description": "AI coding assistant configuration",
+      "isRequired": true,
+      "choices": [
+        {
+          "choice": "claude",
+          "description": "Claude Code"
+        },
+        {
+          "choice": "copilot",
+          "description": "GitHub Copilot"
+        }
+      ]
+    }
+  },
+
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        ".template.config/**/*",
+        ".claude/.mcp.json",
+        ".github/.mcp.json"
+      ],
+      "modifiers": [
+        {
+          "condition": "(ai == \"claude\")",
+          "exclude": [
+            ".github/**/*"
+          ]
+        },
+        {
+          "condition": "(ai == \"copilot\")",
+          "exclude": [
+            ".claude/**/*",
+            "CLAUDE.md"
+          ]
+        }
+      ]
+    },
+
+    {
+      "condition": "(ai == \"claude\")",
+      "source": ".claude/",
+      "target": "./",
+      "include": [
+        ".mcp.json"
+      ]
+    },
+
+    {
+      "condition": "(ai == \"copilot\")",
+      "source": ".github/",
+      "target": "./",
+      "include": [
+        ".mcp.json"
+      ]
+    }
+  ]
 }
