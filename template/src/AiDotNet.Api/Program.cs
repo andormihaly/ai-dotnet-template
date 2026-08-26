@@ -1,4 +1,5 @@
 using AiDotNet.Api.ExceptionHandling;
+using AiDotNet.Api.Validation;
 using AiDotNet.Application;
 using AiDotNet.Infrastructure;
 using OpenTelemetry.Metrics;
@@ -9,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
-builder.Services.AddControllers();
+builder.Services.AddControllers(options => options.Filters.Add<FluentValidationActionFilter>());
 builder.Services.AddOpenApi();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
