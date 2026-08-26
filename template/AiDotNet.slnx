@@ -5,4 +5,7 @@
     <Project Path="src/AiDotNet.Domain/AiDotNet.Domain.csproj" />
     <Project Path="src/AiDotNet.Infrastructure/AiDotNet.Infrastructure.csproj" />
   </Folder>
+  <Folder Name="/test/">
+    <Project Path="tests/AiDotNet.ArchitectureTests/AiDotNet.ArchitectureTests.csproj" />
+  </Folder>
 </Solution>
