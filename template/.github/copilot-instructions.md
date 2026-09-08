@@ -10,10 +10,10 @@ The project is designed for AI-assisted software development with GitHub Copilot
 
 The solution follows Clean Architecture and consists of four projects:
 
-- `AiDotNet.Api` — ASP.NET Core Web API, controllers, application entry point, and composition root.
-- `AiDotNet.Application` — application logic, features, interfaces, configuration, and application-level abstractions.
-- `AiDotNet.Domain` — domain model and core business rules.
-- `AiDotNet.Infrastructure` — infrastructure implementations, persistence, and external services.
+- `Api` — ASP.NET Core Web API, controllers, application entry point, and composition root.
+- `Application` — application logic, features, interfaces, configuration, and application-level abstractions.
+- `Domain` — domain model and core business rules.
+- `Infrastructure` — infrastructure implementations, persistence, and external services.
 
 ### Dependency Rules
 
@@ -109,3 +109,23 @@ MCP servers provide tools that extend AI capabilities with structured access to 
 - Do not duplicate detailed guidance that belongs in path-specific instructions, skills, or agents.
 - Prefer loading specialized context only when it is relevant to the current task.
 - Keep AI context token-conscious.
+
+## Roslyn MCP Code Navigation
+
+Use the `dotnet-roslyn` MCP server as the preferred source of semantic information about the loaded .NET solution.
+
+- Prefer Roslyn MCP over grep, globbing, repository-wide text search, or broad source-file reads when the task is about C# symbols, usages, implementations, callers, inheritance, dependencies, project structure, ASP.NET endpoints, or dependency injection.
+- Start with the smallest semantic query that can answer the discovery question. Use MCP results to narrow the scope before reading source.
+- Treat successful MCP discovery as a replacement for equivalent repository-wide discovery. Do not repeat the same lookup with grep, glob, text search, or broad file reads.
+- Wait for MCP discovery results before deciding which source files need to be read. Do not launch equivalent repository discovery in parallel with the MCP call.
+- Read source only when implementation details are still needed or when a file must be modified. Prefer targeted member/source retrieval or a file outline before reading a full file.
+- For project configuration, dependencies, endpoints, and DI registrations, prefer the corresponding Roslyn MCP capability before manually inspecting `.csproj`, `Directory.*.props`, controller registrations, `Program.cs`, or DI extension files.
+- Before changing a shared symbol, public API, abstraction, endpoint, dependency, or architectural boundary, use semantic impact analysis where relevant.
+- Do not force MCP usage when the required code is already known and present in context, or when MCP cannot answer the question precisely.
+- Keep MCP usage sequential and purposeful: semantic discovery → targeted source inspection when needed → modification → verification.
+- Avoid redundant tool calls. Once a trustworthy MCP result answers a question, reuse it instead of rediscovering the same information.
+- Prefer semantic information from Roslyn MCP when it can answer a codebase question more precisely than repository inspection.
+- Use information already obtained from MCP to guide subsequent exploration and avoid unnecessary or redundant context gathering.
+- Keep repository exploration proportional to the task: inspect only the additional source or configuration needed to understand or implement the change.
+The goal is not to call every MCP tool. The goal is to use Roslyn semantics whenever they reduce ambiguity, repository scanning, or unnecessary context consumption.
+

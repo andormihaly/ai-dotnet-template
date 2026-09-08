@@ -3,6 +3,13 @@
     "microsoft-learn": {
       "type": "http",
       "url": "https://learn.microsoft.com/api/mcp"
+    },
+    "dotnet-roslyn": {
+      "command": "dotnet-roslyn-mcp",
+      "args": [
+        "--solution",
+        "AiDotNet.slnx"
+      ]
     }
   }
 }

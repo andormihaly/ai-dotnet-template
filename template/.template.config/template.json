@@ -40,6 +40,7 @@
       "exclude": [
         ".template.config/**/*",
         ".claude/.mcp.json",
+        ".claude/CLAUDE.md",
         ".github/.mcp.json"
       ],
       "modifiers": [
@@ -52,8 +53,7 @@
         {
           "condition": "(ai == \"copilot\")",
           "exclude": [
-            ".claude/**/*",
-            "CLAUDE.md"
+            ".claude/**/*"
           ]
         }
       ]
@@ -64,7 +64,8 @@
       "source": ".claude/",
       "target": "./",
       "include": [
-        ".mcp.json"
+        ".mcp.json",
+        "CLAUDE.md"
       ]
     },
 
