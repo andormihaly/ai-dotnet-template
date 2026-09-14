@@ -28,6 +28,10 @@
         {
           "choice": "copilot",
           "description": "GitHub Copilot"
+        },
+        {
+          "choice": "codex",
+          "description": "OpenAI Codex"
         }
       ]
     }
@@ -41,7 +45,8 @@
         ".template.config/**/*",
         ".claude/.mcp.json",
         ".claude/CLAUDE.md",
-        ".github/.mcp.json"
+        ".github/.mcp.json",
+        ".codex/**/*"
       ],
       "modifiers": [
         {
@@ -54,6 +59,13 @@
           "condition": "(ai == \"copilot\")",
           "exclude": [
             ".claude/**/*"
+          ]
+        },
+        {
+          "condition": "(ai == \"codex\")",
+          "exclude": [
+            ".claude/**/*",
+            ".github/**/*"
           ]
         }
       ]
@@ -76,6 +88,12 @@
       "include": [
         ".mcp.json"
       ]
+    },
+
+    {
+      "condition": "(ai == \"codex\")",
+      "source": ".codex/",
+      "target": "./"
     }
   ]
 }
